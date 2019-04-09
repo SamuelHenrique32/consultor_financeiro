@@ -24,7 +24,9 @@ verifica_poupanca_minima(Nome_cliente,adequada):-
     Poupanca>=Valor,!.
 
 verifica_poupanca_minima(Nome_cliente,inadequada):-
-    write("O valor em poupança para o cliente "), write(Nome_cliente), write(" esta abaixo do adequado! Necessita de R$5000 por dependente.").
+    cliente(Nome_cliente,_,_,Poupanca,Num_dependentes),
+    Valor_necessario is Num_dependentes*5000-Poupanca,
+    write("O valor em poupança para o cliente "), write(Nome_cliente), write(" esta abaixo do adequado! Necessita de mais R$"), write(Valor_necessario).
 
 %verifica_renda(Cliente)
 verifica_renda(Nome_cliente):-
@@ -33,3 +35,26 @@ verifica_renda(Nome_cliente):-
     Necessario_dependente is Num_dependentes*4000,
     Renda_anual_necessaria is 15000 + Necessario_dependente,
     Renda_anual>=Renda_anual_necessaria,!.
+
+verifica_renda(Nome_cliente):-
+    cliente(Nome_cliente,Renda_mensal,_,_,Num_dependentes),
+    Renda_anual is Renda_mensal*12,
+    Necessario_dependente is Num_dependentes*4000,
+    Renda_anual_necessaria is 15000 + Necessario_dependente,
+    write("\nA renda anual é inadequada! Necessita de R$"), write(Renda_anual_necessaria), write(" reais anuais"), write(". Possui atualmente R$"), write(Renda_anual), write("/ano").
+
+%verifica_aplicacoes(Cliente, Resposta)
+verifica_aplicacoes(Cliente, Resposta):-
+    verifica_poupanca_minima(Cliente, Resposta),
+    verifica_renda(Cliente),
+    write("\nO cliente "), write(Cliente), write(" possui uma conta poupança e renda adequadas! Sugiro um investimento mais arriscado, como o mercado de ações!").
+
+
+
+
+
+
+
+
+% repetiçoes de variaveis nos predicados?
+% verifica_aplicacoes(samara,Resposta).

@@ -96,7 +96,7 @@ main(Cliente):-
     read(Poupanca),nl,
     write("Há quantos dependentes? "),
     read(Nro_dep),nl,
-    assertz(cliente(Cliente,Renda_mensal,estavel,Poupanca,Nro_dep)),
+    assertz(cliente(Cliente,Renda_mensal,Estabilidade,Poupanca,Nro_dep)),
     write("Pronto! Irei consultar sua situação financeira..."),nl,nl,
     consultor(Cliente),!.    
 

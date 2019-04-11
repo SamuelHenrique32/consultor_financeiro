@@ -80,21 +80,27 @@ consultor(Cliente):-
     cliente(Cliente,_,_,_,_),
     write("\n"), write(Cliente), write("Você ainda não é um investidor. \n Está na hora de começar!!"),!.
 
-principal(Cliente):-
+main(Cliente):-
     cliente(Cliente,_,_,_,_),
     consultor(Cliente),!.
-principal(Cliente):-
+main(Cliente):-
     write("Cliente desconhecido, deseja cadastrar? s/n "),
     read(Opcao),nl,
     Opcao == s,
     write("Ótimo! Preciso de alguns dados...\nInforme a renda mensal: "),
     read(Renda_mensal),nl,
-    write("A renda é estável? s/n "),
-    read(Estabilidade),nl,                      %VER
+    write("A renda é estável? estavel/instavel "),
+    read(Estabilidade),nl,
     write("Há quanto dinheiro na poupança? "),
     read(Poupanca),nl,
     write("Há quantos dependentes? "),
     read(Nro_dep),nl,
     assertz(cliente(Cliente,Renda_mensal,estavel,Poupanca,Nro_dep)),
     write("Pronto! Irei consultar sua situação financeira..."),nl,nl,
-    consultor(Cliente).    
+    consultor(Cliente),!.    
+
+iniciar():-
+    write("\n\nInforme o nome de um cliente: "),
+    read(Cliente),nl,
+    main(Cliente),
+    iniciar().

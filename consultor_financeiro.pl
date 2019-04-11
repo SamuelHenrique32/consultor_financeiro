@@ -3,12 +3,12 @@
 
 %cliente(nome,renda_mensal,renda_estavel,poupanca,dependentes)
 cliente(anderson,1916,estavel,15000,2).
-cliente(andressa,2100,estavel,9740,1).
-cliente(bruna,4670,instavel,1450,1).
-cliente(camila,3780,estavel,12300,2).
-cliente(caroline,2000,instavel,23000,1).
-cliente(daiane,4100,estavel,32000,3).
-cliente(eduardo,980,instavel,2600,1).
+cliente(andressa,1590,estavel,10000,1).
+cliente(bruna,1580,estavel,9999,1).
+cliente(camila,1300,estavel,5500,0).
+cliente(caroline,1050,estavel,4200,0).
+cliente(daiane,2000,estavel,21000,3).
+cliente(eduardo,2700,instavel,5245,0).
 cliente(guilherme,3320,instavel,10680,2).
 cliente(ingrid,6572,instavel,11400,4).
 cliente(juliane,1784,estavel,9800,2).
@@ -60,6 +60,7 @@ verifica_renda_minima(Cliente,adequada):-
     Renda_anual>=15000,!.
 verifica_renda_minima(_,inadequada).
 
+%consultor
 consultor(Cliente):-
     verifica_poupanca_minima(Cliente,Res_poupanca),
     Res_poupanca == inadequada,
@@ -84,7 +85,7 @@ main(Cliente):-
     cliente(Cliente,_,_,_,_),
     consultor(Cliente),!.
 main(Cliente):-
-    write("Cliente desconhecido, deseja cadastrar? s/n "),
+    write("\nCliente desconhecido, deseja cadastrar? s/n "),
     read(Opcao),nl,
     Opcao == s,
     write("Ótimo! Preciso de alguns dados...\nInforme a renda mensal: "),
@@ -100,7 +101,7 @@ main(Cliente):-
     consultor(Cliente),!.    
 
 iniciar():-
-    write("\n\nInforme o nome de um cliente: "),
-    read(Cliente),nl,
+    write("\n\nInforme o nome de um cliente: "),nl,
+    read(Cliente),
     main(Cliente),
     iniciar().
